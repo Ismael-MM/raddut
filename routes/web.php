@@ -24,3 +24,8 @@ Route::get('/home', function () {
     return view('home');
 })->middleware(['auth', 'verified'])->name('home');
 
+//rutas A5
+Route::get('community', [App\Http\Controllers\CommunityLinkController::class, 'index']);
+
+Route::post('community', [App\Http\Controllers\CommunityLinkController::class, 'store']);
+
