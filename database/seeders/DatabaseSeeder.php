@@ -1,6 +1,8 @@
 <?php
 
 namespace Database\Seeders;
+use DB;
+use App\Models\CommunityLink;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
