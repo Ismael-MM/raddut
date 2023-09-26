@@ -42,6 +42,6 @@ Route::get('/numeros/{numeros}', function (string $numeros) {
     return $numeros;
 })->where('numeros', '[0-9]+');
 
-Route::get('/test/{letra}/{numeros}', function (string $letra, string $numeros) {
-    return ($letra + $numeros);
-})->where('numeros' => '[0-9]+', 'letra' => '[A-Z][a-z]+');
+Route::get('/parametros/{letra}/{numeros}', function (string $letra, string $numeros) {
+    return $numeros;
+})->where(['letra' => '[a-z]+', 'numeros' => '[0-9]+']);
