@@ -59,4 +59,20 @@ Route::get('/timezone', function () {
     return config('app.timezone');
 });
 
-//Mas sobre vistas
+// Vistas
+Route::view('/inicio', 'home');
+
+//array asosiativo
+Route::view('/fecha', 'fecha', ['day' => date('d'),'month' => date('m'),'year' => date('y') ]);
+
+$fechas = ['day' => date('d'),'month' => date('m'),'year' => date('y') ];
+Route::view('/fechacompact', 'fechacompact', compact('fechas'));
+
+Route::get('/fechaWith', function () {
+    return view('fecha')
+                ->with('day', date('d'))
+                ->with('month', date('m'))
+                ->with('year', date('y'));
+});
+
+Route::view('/404', '404',);
