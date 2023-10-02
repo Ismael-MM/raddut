@@ -15,6 +15,20 @@
         <div class="alert alert-danger">{{ $message }}</div>
         @enderror
     </div>
+    <div class="form-group">
+        <label for="Channel">Channel:</label>
+        <select class="form-control @error('channel_id') is-invalid @enderror" name="channel_id">
+            <option selected disabled>Pick a Channel...</option>
+            @foreach ($channels as $channel)
+            <option value="{{ $channel->id }}">
+                {{ $channel->title }}
+            </option>
+            @endforeach
+        </select>
+        @error('channel_id')
+        <span class="text-danger">{{ $message }}</span>
+        @enderror
+    </div>
 
     <div class="form-group pt-3">
         <button class="btn btn-primary">Contribute!</button>
