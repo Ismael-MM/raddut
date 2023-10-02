@@ -30,8 +30,17 @@ class CommunityLinkController extends Controller
      */
     public function store(Request $request)
     {
-        request()->merge(['user_id' => Auth::id(), 'channel_id' => 1 ]);
-        CommunityLink::create($request->all());
+    
+        $data = $request->validate([
+            'title' => 'required|max:255',
+            'link' => 'required|unique:community_links|url|max:255', 
+        ]);
+    
+        $data['user_id'] = Auth::id();
+        $data['channel_id'] = 1;
+    
+        CommunityLink::create($data);
+    
         return back();
     }
 
