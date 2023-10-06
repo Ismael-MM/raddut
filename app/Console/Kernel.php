@@ -10,7 +10,7 @@ class Kernel extends ConsoleKernel
 
     protected $commands = [
 
-        Commands\DispatchTestJob::class,
+        Commands\DispatchTestJobCommand::class,
         ];       
     /**
      * Define the application's command schedule.
