@@ -32,14 +32,16 @@ class CommunityLinkController extends Controller
      */
     public function store(Request $request)
     {
-    
+        $approved = Auth::User()->isTrusted();
+
         $data = $request->validate([
             'title' => 'required|max:255',
             'link' => 'required|unique:community_links|url|max:255', 
             'channel_id' => 'required|exists:channels,id',
         ]);
-    
         $data['user_id'] = Auth::id();
+        $data['approved'] = $approved;
+
     
         CommunityLink::create($data);
     
