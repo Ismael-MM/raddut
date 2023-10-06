@@ -3,7 +3,7 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
-use app\Jobs\TestJob;
+use App\Jobs\TestJob;
 
 class DispatchTestJobCommand extends Command
 {
