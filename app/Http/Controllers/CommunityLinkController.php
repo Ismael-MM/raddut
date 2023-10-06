@@ -44,8 +44,13 @@ class CommunityLinkController extends Controller
 
     
         CommunityLink::create($data);
-    
-        return back();
+        
+        if ($approved == 1) {
+            return back()->with('success','Tu link a sido publicado');
+        }else{
+            return back()->with('info','Tu link tiene que ser revisado por un administrador');
+        }
+
     }
 
     /**
