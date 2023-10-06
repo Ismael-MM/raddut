@@ -6,6 +6,9 @@
         {{-- Left colum to show all the links in the DB --}}
         <div class="col-md-8">
             <h1>Community</h1>
+            @if(count($links) == 0)
+                <p>Aún no hay contribuciones aprobadas</p>
+            @endif
             @foreach ($links as $link)
             <li>
                 <a href="{{ $link->link }}" target="_blank">
