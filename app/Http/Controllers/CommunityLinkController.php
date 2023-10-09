@@ -14,7 +14,7 @@ class CommunityLinkController extends Controller
      */
     public function index()
     {
-        $links = CommunityLink::where('approved', 1)->paginate(25);
+        $links = CommunityLink::where('approved', true)->latest('updated_at')->paginate(25);
         $channels = Channel::orderBy('title','asc')->get();
         return view('community/index', compact('links','channels'));
     }
@@ -36,19 +36,26 @@ class CommunityLinkController extends Controller
 
         $data = $request->validate([
             'title' => 'required|max:255',
-            'link' => 'required|unique:community_links|url|max:255', 
+            'link' => 'required|url|max:255', 
             'channel_id' => 'required|exists:channels,id',
         ]);
         $data['user_id'] = Auth::id();
         $data['approved'] = $approved;
 
-    
-        CommunityLink::create($data);
         
-        if ($approved == 1) {
-            return back()->with('success','Tu link a sido publicado');
+        if (CommunityLink::hasAlreadyBeenSubmitted($data['link'])) {
+            if ($approved == 1) {
+                return back()->with('success','Tu link a sido actualizdo');
+            }else{
+                return back()->with('info','Tu link ya existe, la actualización tiene que ser revisada por un administrador');
+            }
         }else{
-            return back()->with('info','Tu link tiene que ser revisado por un administrador');
+            CommunityLink::create($data);
+            if ($approved == 1) {
+                return back()->with('success','Tu link a sido publicado');
+            }else{
+                return back()->with('info','Tu link tiene que ser revisado por un administrador');
+            }
         }
 
     }
