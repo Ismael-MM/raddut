@@ -26,7 +26,7 @@ class CommunityLink extends Model
     protected static function hasAlreadyBeenSubmitted($link)
     {
         if ($existing = static::where('link', $link)->first()) {
-            if (Auth::user()->isTrusted()) {
+            if (Auth::user()->isTrusted() || Auth::user()->isTrusted() == false && $existing['approved'] == 0) {
                 $existing->touch();
                 $existing->save();
             }
