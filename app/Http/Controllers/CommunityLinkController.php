@@ -35,7 +35,7 @@ class CommunityLinkController extends Controller
     {
         $approved = Auth::User()->isTrusted();
 
-        $data = $request->validate();
+        $data = $request->validated();
         $data['user_id'] = Auth::id();
         $data['approved'] = $approved;
 
