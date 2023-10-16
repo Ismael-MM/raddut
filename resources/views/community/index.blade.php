@@ -5,7 +5,7 @@
         {{-- Left colum to show all the links in the DB --}}
         <div class="col-md-8">
             @include('flash-message')
-            <h1>Community</h1>
+            <h1><a class="text-decoration-none" href="/community">Community</a> - {{ $channel ? $channel->title : '' }}</h1>
             @include('links')
         </div>
         {{-- Right colum to show the form to upload a link --}}

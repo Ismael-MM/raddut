@@ -2,6 +2,8 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('css/post.css') }}" >
 </header>
 
+
+
 @if(count($links) == 0)
                 <p>Aún no hay contribuciones aprobadas</p>
 @endif
