@@ -23,7 +23,7 @@ class CommunityLink extends Model
         return $this->belongsTo(Channel::class, 'channel_id');
     }
 
-    protected static function hasAlreadyBeenSubmitted($link)
+    public function hasAlreadyBeenSubmitted($link)
     {
         if ($existing = static::where('link', $link)->first()) {
             if (Auth::user()->isTrusted() || Auth::user()->isTrusted() == false && $existing['approved'] == 0) {

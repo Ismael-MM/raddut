@@ -33,6 +33,9 @@ class CommunityLinkController extends Controller
      */
     public function store(CommunityLinkForm $request)
     {
+        $link = new CommunityLink();
+        $link->user_id = Auth::id();
+
         $approved = Auth::User()->isTrusted();
 
         $data = $request->validated();
@@ -40,7 +43,7 @@ class CommunityLinkController extends Controller
         $data['approved'] = $approved;
 
         
-        if (CommunityLink::hasAlreadyBeenSubmitted($data['link'])) {
+        if ($link->hasAlreadyBeenSubmitted($data['link'])) {
             if ($approved == 1) {
                 return back()->with('success','Tu link a sido actualizdo');
             }else{
