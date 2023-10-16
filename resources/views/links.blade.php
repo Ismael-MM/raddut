@@ -11,7 +11,7 @@
                     {{ $link->title }}
                 </a>
                 <span class="label label-default" style="background: {{ $link->channel->color }}">
-                    {{ $link->channel->title }}
+                    <a class="text-decoration-none" href="/community/{{ $link->channel->slug }}"> {{ $link->channel->title }}</a>
                 </span>
                 <small>Contributed by: {{ $link->creator->name }} {{ $link->updated_at->diffForHumans() }}</small>
             </li>
