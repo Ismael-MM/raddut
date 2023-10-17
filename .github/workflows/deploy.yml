@@ -10,7 +10,7 @@ jobs:
       - name: Deploy
         uses: appleboy/ssh-action@v0.1.8
         with:
-          host: 190.23.60.90
+          host: 103.23.60.90
           port: 2222
           username: ismael
           key: ${{secrets.PRIVATE_KEY}}
