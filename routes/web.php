@@ -32,3 +32,11 @@ Route::post('community', [App\Http\Controllers\CommunityLinkController::class, '
 // A11
 Route::get('community/{channel:slug}', [App\Http\Controllers\CommunityLinkController::class, 'index']);
 
+Route::get('/', function () {
+
+    dd(opcache_get_status());
+
+    return view('welcome');
+
+});
+
