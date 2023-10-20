@@ -14,8 +14,12 @@ class Articulos extends Model
         'titulo',
     ];
 
-    public function writer()
+    public function escritor()
     {
-        return $this->belongsTo('App\Models\Escritor');
+        return $this->belongsTo(Escritor::class);
+    }
+
+    public function tags() {
+        return $this->belongsToMany(tag::class);
     }
 }

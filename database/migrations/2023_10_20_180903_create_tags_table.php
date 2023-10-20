@@ -11,12 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('articulos', function (Blueprint $table) {
+        Schema::create('tags', function (Blueprint $table) {
             $table->id();
-            $table->string('titulo');
-            $table->unsignedBigInteger('escritor_id');
             $table->timestamps();
-            $table->foreign('escritor_id')->references('id')->on('escritors')->onDelete('cascade');
         });
     }
 
@@ -25,6 +22,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('articulos');
+        Schema::dropIfExists('tags');
     }
 };

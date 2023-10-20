@@ -16,6 +16,6 @@ class Escritor extends Model
 
     public function articulos()
     {
-        return $this->hasMany('App\Models\Articulos');
+        return $this->hasMany(Articulos::class);
     }
 }
