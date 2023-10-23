@@ -15,7 +15,6 @@ use Illuminate\Support\Facades\Auth;
 */
 
 Route::get('/', function () {
-    dd(opcache_get_status());
 
     return view('welcome');
 });
