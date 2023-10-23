@@ -43,7 +43,19 @@ class User extends Authenticatable implements MustVerifyEmail
         'password' => 'hashed',
     ];
 
-    function isTrusted(){
+    function isTrusted()
+    {
         return $this->trusted ? true : false;
+    }
+
+    function votes()
+    {
+        return $this->belongsToMany(CommunityLink::class, 'community_link_users')->withTimestamps();
+    }
+
+
+    public function votedFor(CommunityLink $link)
+    {
+        return $this->votes->contains($link);
     }
 }
