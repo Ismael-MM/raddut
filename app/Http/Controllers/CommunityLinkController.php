@@ -15,7 +15,9 @@ class CommunityLinkController extends Controller
      */
     public function index(Channel $channel = null)
     {
-        if ($channel != null) {
+        if (request()->exists('popular')) {
+            $links = CommunityLink::where('approved', true)->withCount('users')->orderBy('users_count', 'desc')->paginate(5);
+        }else if ($channel != null) {
             $links = $channel->CommunityLinks()->where('approved', true)->latest('updated_at')->paginate(25);
         }else{
             $links = CommunityLink::where('approved', true)->latest('updated_at')->paginate(25);
