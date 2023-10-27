@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CommunityLinkUserController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -32,5 +33,7 @@ Route::post('community', [App\Http\Controllers\CommunityLinkController::class, '
 
 // A11
 Route::get('community/{channel:slug}', [App\Http\Controllers\CommunityLinkController::class, 'index']);
+
+Route::post('votes/{link}',[App\Http\Controllers\CommunityLinkUserController::class, 'store']);
 
 

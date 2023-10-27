@@ -17,7 +17,7 @@
     </span>
     <form method="POST" action="/votes/{{ $link->id }}">
         {{ csrf_field() }}
-        <button type="button" class="btn {{ Auth::check() && Auth::user()->votedFor($link) ? 'btn-success' : 'btn-secondary' }}" {{ Auth::guest() ? 'disabled' : '' }}>
+        <button type="submit" class="btn {{ Auth::check() && Auth::user()->votedFor($link) ? 'btn-success' : 'btn-secondary' }}" {{ Auth::guest() ? 'disabled' : '' }}>
             {{$link->users()->count()}}
         </button>
     </form>

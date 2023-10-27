@@ -11,4 +11,12 @@ class CommunityLinkUser extends Model
     protected $fillable = [
         'user_id', 'community_link_id'
     ];
+
+    function toggle() {
+        if ($this->id) {
+            $this->delete();
+        } else {
+            $this->save();
+        }   
+    }
 }
