@@ -18,6 +18,12 @@ class CommunityLinksQuery
         return $query;
     }
 
+    public function getBySearch($search)
+    {
+        $query = CommunityLink::where('approved', true)->where('title', 'like', '%'.$search.'%')->latest('updated_at')->paginate(25);
+        return $query;
+    }
+
     public function getAll()
     {
         $query = CommunityLink::where('approved', true)->latest('updated_at')->paginate(25);

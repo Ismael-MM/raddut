@@ -1,5 +1,6 @@
 <header>
     <link rel="stylesheet" type="text/css" href="{{ asset('css/post.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 </header>
 
 
@@ -26,7 +27,7 @@
     <form method="POST" action="/votes/{{ $link->id }}">
         {{ csrf_field() }}
         <button type="submit" class="btn {{ Auth::check() && Auth::user()->votedFor($link) ? 'btn-success' : 'btn-secondary' }}" {{ Auth::guest() ? 'disabled' : '' }}>
-            {{$link->users()->count()}}
+            <i class="fa-solid fa-thumbs-up"></i> {{$link->users()->count()}}
         </button>
     </form>
     <small>Contributed by: {{ $link->creator->name }} {{ $link->updated_at->diffForHumans() }}</small>

@@ -25,6 +25,8 @@ class CommunityLinkController extends Controller
             }
         }else if (request()->exists('popular')) {
             $links = $query->getMostPopular();
+        }else if(request()->exists('search')){
+            $links = $query->getBySearch(trim(request()->get('search')));
         }else{
             $links = $query->getAll();
         }
