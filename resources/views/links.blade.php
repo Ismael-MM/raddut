@@ -7,6 +7,14 @@
 @if(count($links) == 0)
 <p>Aún no hay contribuciones aprobadas</p>
 @endif
+<ul class="nav">
+    <li class="nav-item">
+        <a class="nav-link {{request()->exists('popular') ? '' : 'disabled' }}" href="{{request()->url()}}">Most recent</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link {{request()->exists('popular') ? 'disabled' : '' }}" href="?popular">Most popular</a>
+    </li>
+</ul>
 @foreach ($links as $link)
 <li>
     <a href="{{ $link->link }}" target="_blank">

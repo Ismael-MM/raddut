@@ -17,10 +17,14 @@ class CommunityLinkController extends Controller
     public function index(Channel $channel = null)
     {
         $query = new CommunityLinksQuery();
-        if (request()->exists('popular')) {
+        if ($channel != null) {
+            if (request()->exists('popular')) {
+                $links = $query->getByChannelPopular($channel);
+            }else {
+                $links = $query->getByChannel($channel);
+            }
+        }else if (request()->exists('popular')) {
             $links = $query->getMostPopular();
-        }else if ($channel != null) {
-            $links = $query->getByChannel($channel);
         }else{
             $links = $query->getAll();
         }

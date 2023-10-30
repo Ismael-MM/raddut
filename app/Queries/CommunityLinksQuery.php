@@ -12,6 +12,12 @@ class CommunityLinksQuery
         return $query;
     }
 
+    public function getByChannelPopular(Channel $channel)
+    {
+        $query = $channel->CommunityLinks()->where('approved', true)->withCount('users')->orderBy('users_count', 'desc')->paginate(5);
+        return $query;
+    }
+
     public function getAll()
     {
         $query = CommunityLink::where('approved', true)->latest('updated_at')->paginate(25);
