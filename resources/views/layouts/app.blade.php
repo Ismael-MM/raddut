@@ -62,6 +62,9 @@
                         </li>
                         @endif
                         @else
+                        <li class="nav-item">
+                            <img class="nav-link rounded-circle shadow-4" style="width: 50px; height:50px;" alt="Avatar" src="storage/{{Auth::user()->profile->imageUpload }}"></img>
+                        </li>
                         <li class="nav-item dropdown">
                             <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                 {{ Auth::user()->name }}

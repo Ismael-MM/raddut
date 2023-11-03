@@ -14,7 +14,9 @@ class ProfileController extends Controller
      */
     public function index()
     {
-        return view('profile/edit');
+        $avatar = Auth::user()->profile->imageUpload;
+
+        return view('profile/edit', compact('avatar'));
     }
 
     /**
