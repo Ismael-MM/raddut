@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CommunityLinkUserController;
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -34,6 +35,11 @@ Route::post('community', [App\Http\Controllers\CommunityLinkController::class, '
 // A11
 Route::get('community/{channel:slug}', [App\Http\Controllers\CommunityLinkController::class, 'index']);
 
-Route::post('votes/{link}',[App\Http\Controllers\CommunityLinkUserController::class, 'store']);
+Route::post('votes/{link}',[App\Http\Controllers\CommunityLinkUserController::class, 'store'])->middleware(['auth', 'verified']);
+
+//A17
+Route::get('profile', [App\Http\Controllers\ProfileController::class, 'index'])->middleware(['auth', 'verified']);
+
+Route::post('profile/store',[App\Http\Controllers\ProfileController::class,'store'])->middleware(['auth', 'verified']);
 
 
