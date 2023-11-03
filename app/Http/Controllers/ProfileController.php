@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\ProfileForm;
 use App\Models\Profile;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ProfileController extends Controller
 {
@@ -29,7 +30,15 @@ class ProfileController extends Controller
      */
     public function store(ProfileForm $request)
     {
-        //
+        if ($request->imageUpload) {
+            $path = $request->file('imageUpload')->store('images', 'public');
+            
+            Profile::updateOrCreate(
+                ['user_id' => Auth::id()],
+                ['imageUpload' => $path]
+            );
+            return back()->with('success', "Your image has been updated.");
+            }
     }
 
     /**
