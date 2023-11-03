@@ -19,8 +19,18 @@ class CommunityLinksQuery
     }
 
     public function getBySearch($search)
-    {
-        $query = CommunityLink::where('approved', true)->where('title', 'like', '%'.$search.'%')->latest('updated_at')->paginate(25);
+    {  
+        $palabras = explode(" ",$search);
+        if (count($palabras) >= 2) {
+            $query = CommunityLink::where('approved', true)
+        ->where('title', 'like', '%'.$palabras[0].'%')
+        ->orWhere('title', 'like', '%'.$palabras[1].'%')
+        ->latest('updated_at')->paginate(25);
+        }else{
+            $query = CommunityLink::where('approved', true)
+            ->where('title', 'like', '%'.$search.'%')
+            ->latest('updated_at')->paginate(25);
+        }
         return $query;
     }
 

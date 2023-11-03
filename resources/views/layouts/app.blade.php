@@ -41,7 +41,7 @@
                         <li class="nav-item">
                             <form action="/community/" method="get" class="row">
                                 <div class="col-auto">
-                                    <input type="text" name="search" class="form-control" placeholder="Buscar...">
+                                    <input type="text" value="{{old('search')}}" name="search" class="form-control" placeholder="Buscar...">
                                 </div>
                                 <div class="col-auto">
                                     <button type="search" class="btn btn-primary">Search</button>
