@@ -6,6 +6,7 @@ use App\Http\Requests\ProfileForm;
 use App\Models\Profile;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Intervention\Image\Facades\Image;
 
 class ProfileController extends Controller
 {
@@ -33,14 +34,26 @@ class ProfileController extends Controller
     public function store(ProfileForm $request)
     {
         if ($request->imageUpload) {
-            $path = $request->file('imageUpload')->store('images', 'public');
-            
+            //$relativePath = $request->file('imageUpload')->store('images', 'public');
+
+            $requestImage = $request->file('imageUpload');
+            $img = Image::make($requestImage);
+
+            $img->resize(null, 400, function ($constraint) {
+                $constraint->aspectRatio();
+                $constraint->upsize();
+            });
+
+            $name = $requestImage->hashName();
+            $path = config('filesystems.disks.public.root') . '/images/' . $name;
+            $img->save($path);
+
             Profile::updateOrCreate(
                 ['user_id' => Auth::id()],
-                ['imageUpload' => $path]
+                ['imageUpload' => "images/" . $name]
             );
             return back()->with('success', "Your image has been updated.");
-            }
+        }
     }
 
     /**
