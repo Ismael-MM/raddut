@@ -12,6 +12,11 @@
             {!! $errors->first('email', '<div class="invalid-feedback">:message</div>') !!}
         </div>
         <div class="form-group">
+            {{ Form::label('password') }}
+            {{ Form::text('password', $user->password, ['class' => 'form-control' . ($errors->has('password') ? ' is-invalid' : ''), 'placeholder' => 'Password']) }}
+            {!! $errors->first('password', '<div class="invalid-feedback">:message</div>') !!}
+        </div>
+        <div class="form-group">
             {{ Form::label('trusted') }}
             {{ Form::text('trusted', $user->trusted, ['class' => 'form-control' . ($errors->has('trusted') ? ' is-invalid' : ''), 'placeholder' => 'Trusted']) }}
             {!! $errors->first('trusted', '<div class="invalid-feedback">:message</div>') !!}
