@@ -12,11 +12,11 @@ class LoginController extends Controller
     {
         if (Auth::attempt(['email' => $request->email, 'password' => $request->password]) && Auth::user()->hasVerifiedEmail()) {
             $user = Auth::user();
-                $token = $user->createToken('MyApp')->accessToken;
-                return response()->json([
-                    'message' => 'User loged successfully.',
-                    'token' => $token
-                ], 200);
+            $token = $user->createToken('MyApp')->accessToken;
+            return response()->json([
+                'message' => 'User loged successfully.',
+                'token' => $token
+            ], 200);
         } else {
             return response()->json(['message' => 'Unauthorized.'], 201);
         }
