@@ -7,6 +7,7 @@ use App\Models\CommunityLink;
 use Illuminate\Http\Request;
 use App\Http\Requests\CommunityLinkForm;
 use App\Queries\CommunityLinksQuery;
+use Illuminate\Support\Facades\Auth;
 
 class CommunityLinkController extends Controller
 {
@@ -38,7 +39,30 @@ class CommunityLinkController extends Controller
      */
     public function store(CommunityLinkForm $request)
     {
-        //
+        $link = new CommunityLink();
+        $link->user_id = Auth::id();
+
+        $approved = Auth::User()->isTrusted();
+
+        $data = $request->validated();
+        $data['user_id'] = Auth::id();
+        $data['approved'] = $approved;
+
+        
+        if ($link->hasAlreadyBeenSubmitted($data['link'])) {
+            if ($approved == 1) {
+                return response()->json(['message' => "Tu link a sido actualizdo"], 201);
+            }else{
+                return response()->json(['message' => "Tu link ya existe, la actualización tiene que ser revisada por un administrador"], 201);
+            }
+        }else{
+            CommunityLink::create($data);
+            if ($approved == 1) {
+                return response()->json(['message' => "Tu link a sido publicado"], 201);
+            }else{
+                return response()->json(['message' => "Tu link tiene que ser revisado por un administrador"], 201);
+            }
+        }
     }
 
     /**
