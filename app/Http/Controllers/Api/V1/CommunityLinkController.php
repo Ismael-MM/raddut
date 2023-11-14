@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\CommunityLink;
 use Illuminate\Http\Request;
 use App\Http\Requests\CommunityLinkForm;
+use App\Queries\CommunityLinksQuery;
 
 class CommunityLinkController extends Controller
 {
@@ -19,7 +20,17 @@ class CommunityLinkController extends Controller
      */
     public function index()
     {
-        //
+        $query = new CommunityLinksQuery();
+
+        if (request()->exists('popular')) {
+            $links = $query->getMostPopular();
+        }else if(request()->exists('search')){
+            $links = $query->getBySearch(trim(request()->get('search')));
+        }else{
+            $links = $query->getAll();
+        }
+
+        return response()->json(['Links' => $links], 200);
     }
 
     /**
