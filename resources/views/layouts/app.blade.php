@@ -25,6 +25,11 @@
                 <a class="navbar-brand" href="{{ url('/') }}">
                     {{ config('app.name', 'Laravel') }}
                 </a>
+                @can('dashBoard', App\Models\User::class)
+                <a class="navbar-brand" href="{{ url('/users') }}">
+                    dashboard
+                </a>
+                @endcan
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -63,7 +68,7 @@
                         @endif
                         @else
                         <li class="nav-item">
-                            <img class="nav-link rounded-circle shadow-4" style="width: 50px; height:50px;" alt="Avatar" src="storage/{{Auth::user()->profile->imageUpload }}"></img>
+                            <img class="nav-link rounded-circle shadow-4" style="width: 50px; height:50px;" alt="Avatar" src="storage/{{Auth::user()?->profile?->imageUpload }}"></img>
                         </li>
                         <li class="nav-item dropdown">
                             <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>

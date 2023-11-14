@@ -43,4 +43,4 @@ Route::get('profile', [App\Http\Controllers\ProfileController::class, 'index'])-
 Route::post('profile/store',[App\Http\Controllers\ProfileController::class,'store'])->middleware(['auth', 'verified']);
 
 //A18
-Route::resource('users', 'App\Http\Controllers\UserController')->middleware(['auth', 'verified']);
+Route::resource('users', 'App\Http\Controllers\UserController')->middleware(['auth', 'verified','can:dashBoard,App\Models\User']);

@@ -55,6 +55,10 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->trusted ? true : false;
     }
 
+    function isAdmin(){
+        return $this->admin ? true : false;
+    }
+
     function votes()
     {
         return $this->belongsToMany(CommunityLink::class, 'community_link_users')->withTimestamps();
